@@ -1,36 +1,51 @@
+const { render } = require("ejs");
 const express = require("express");
+const date = require(__dirname + "/date.js");
 
 const app = express();
 
-var items = [];
+const items = ["buy food"];
+const workItems = [];
 
 app.set("view engine", "ejs");
 
 app.use(express.urlencoded({extended: true}));
+app.use(express.static("public"));
 
 
 app.get("/", (req, res) => {
 
-  var today = new Date();
-  var day = "";
-
-  var options = { 
-    weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' 
-  };
-
-  var day = today.toLocaleDateString("en-US", options);
-
+  day = date.getDate();
   res.render("list", {
-    kindOfDay: day,
-    newListItem: items,
+    listTitle: day,
+    newListItems: items,
   });
 });
 
-
 app.post("/", (req, res) => {
-  var item = req.body.newItem;
-  items.push(item);
-})
+  const item = req.body.newItem;
+
+  if(req.body.list === "Work"){
+    workItems.push(item);
+    res.redirect("/work");
+
+  }else{
+    items.push(item);
+    res.redirect("/");
+  } 
+  
+});
+
+app.get("/work", (req, res) => {
+  res.render("list", {
+    listTitle: "Work List",
+    newListItems: workItems,
+  });
+});
+
+app.get("/about", (req, res) => {
+  res.render("about");
+});
 
 app.listen(3000, () => {
   console.log("Server started on port 3000");
