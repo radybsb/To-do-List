@@ -1,21 +1,135 @@
+/* Elements */
+
 html {
-  background-color: #2C2E43;;
-  min-height: 1000px;
   font-family: 'helvetica neue';
 }
 
+body {
+  background-color: #2C2E43;
+}
+
 h1 {
-  color: black;
   padding: 10px;
   text-align: center;
   color: #2C2E43;
-
 }
 
-.date-tittle{
+p {
+  margin: 0;
+  padding: 20px;
+  font-size: 20px;
+  font-weight: 200;
+  color: #00204a;
+}
+
+footer {
+  color: white;
+  text-align: center;
+}
+
+/* Classes */
+
+/* Navbar */
+
+#menu-btn {
+  margin-left: -52px;
+}
+
+.navbar-toggler-icon{
+  position: fixed;
+}
+
+.active-cont {
+  margin-left: 250px;
+}
+
+.side-navbar {
+  width: 300px;
+  height: 100%;
+  position: fixed;
+  margin-left: -300px;
+  background-color: #2C2E43;
+  transition: 0.5s;
+  border-style: solid;
+  border-width: 2px;
+  border-color: #B2B1B9;
+  border-radius: 5px;
+}
+
+.nav-link {
+  color: #B2B1B9;
+  max-width: 250px;
+  display: inline-block;
+}
+
+.nav-link:active,
+.nav-link:focus,
+.nav-link:hover {
+  color: #fff;
+  font-weight: 900;
+}
+
+.active-nav {
+  margin-left: 0;
+}
+
+.new-list-input[type="text"] {
+  background: #fff;
+  border-radius: 5px;
+  height: 40px;
+  width: 200px;
+  margin-right: 15px;
+}
+
+.add-list-btn.td-button {
+  min-height: 35px;
+  width: 35px;
+  font-size: 20px;
+  background-color: #FFD523;
+  color: #2C2E43;
+}
+
+.add-list-btn.td-button:hover {
+  background-color: #595260;
+}
+
+
+.my-container {
+  transition: 0.4s;
+}
+
+/* delete button */
+
+.delete-list {
+  float: right;
+}
+
+.delete-list-btn {
+  background-color: #2C2E43;
+  margin-right: 30px;
+  margin-top: 10px;
+  border: 0;
+  width: 12px;
+  height: 15px;
+}
+
+.fas {
+  color: rgba(255, 0, 0, 0.583);
+  float: right;
+}
+
+.fas:hover {
+  color: red;
+}
+
+
+
+
+/* Main container */
+
+.date-tittle {
   color: #B2B1B9;
 }
-
 
 .box {
   max-width: 400px;
@@ -30,40 +144,25 @@ h1 {
   text-align: center;
 }
 
-.item {
-  min-height: 70px;
-  display: flex;
-  align-items: center;
-  border-bottom: 1px solid #F1F1F1;
-}
-
-.item:last-child {
-  border-bottom: 0;
-}
-
-input:checked+p {
-  text-decoration: line-through;
-  text-decoration-color: #2C2E43;
-}
-
 input[type="checkbox"] {
   margin: 20px;
 }
 
-p {
-  margin: 0;
-  padding: 20px;
+input[type="text"] {
+  outline: none;
+  text-align: center;
+  height: 60px;
+  top: 10px;
+  border: none;
+  background: transparent;
   font-size: 20px;
   font-weight: 200;
-  color: #00204a;
+  width: 313px;
 }
 
-form {
-  text-align: center;
-  margin-left: 20px;
-}
+/* Add item button */
 
-button {
+.td-button {
   min-height: 50px;
   width: 50px;
   border-radius: 50%;
@@ -76,103 +175,43 @@ button {
   border-width: 0;
 }
 
-button:hover {
+.td-button.list-button {
+  margin-left: 10px;
+  min-height: 30px;
+  width: 30px;
+  font-size: 15px;
+  padding-bottom: 3px;
+}
+
+.td-button:hover {
   background-color: #2C2E43;
 }
 
-input[type="text"] {
-  text-align: center;
-  height: 60px;
-  top: 10px;
-  border: none;
-  background: transparent;
-  font-size: 20px;
-  font-weight: 200;
-  width: 313px;
+/* items */
+
+.new-item-input:checked+p {
+  text-decoration: line-through;
+  text-decoration-color: #2C2E43;
 }
 
-input[type="text"]:focus {
-  outline: none;
+.new-item-input[type="text"]:focus {
   box-shadow: inset 0 -3px 0 0 #2C2E43;
 }
 
-::placeholder {
-  color: grey;
-  opacity: 1;
+/* Items in a list and lists in the lists list */
+
+.item {
+  min-height: 70px;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #F1F1F1;
 }
 
-footer {
-  color: white;
+.item.new-item {
+  border-bottom: 0;
+}
+
+form.item {
   text-align: center;
-}
-
-
-/* checkbox style */
-
-/* Customize the label (the container) */
-.container {
-  display: block;
-  position: relative;
-  padding-left: 35px;
-  margin-bottom: 12px;
-  cursor: pointer;
-  font-size: 22px;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
-
-/* Hide the browser's default checkbox */
-.container input {
-  position: absolute;
-  opacity: 0;
-  cursor: pointer;
-  height: 0;
-  width: 0;
-}
-
-/* Create a custom checkbox */
-.checkmark {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 25px;
-  width: 25px;
-  background-color: #eee;
-}
-
-/* On mouse-over, add a grey background color */
-.container:hover input ~ .checkmark {
-  background-color: #ccc;
-}
-
-/* When the checkbox is checked, add a blue background */
-.container input:checked ~ .checkmark {
-  background-color: #2196F3;
-}
-
-/* Create the checkmark/indicator (hidden when not checked) */
-.checkmark:after {
-  content: "";
-  position: absolute;
-  display: none;
-}
-
-/* Show the checkmark when checked */
-.container input:checked ~ .checkmark:after {
-  display: block;
-}
-
-/* Style the checkmark/indicator */
-.container .checkmark:after {
-  left: 9px;
-  top: 5px;
-  width: 5px;
-  height: 10px;
-  border: solid white;
-  border-width: 0 3px 3px 0;
-  -webkit-transform: rotate(45deg);
-  -ms-transform: rotate(45deg);
-  transform: rotate(45deg);
+  margin-left: 20px;
 }

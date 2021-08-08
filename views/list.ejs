@@ -1,31 +1,68 @@
 <%- include("header") %> 
 
+  <!-- Side navbar -->
+  <div class="side-navbar d-flex justify-content-between flex-wrap flex-column" id="sidebar">
+    <ul class="nav flex-column text-white w-100">
+      <a href="/" class="nav-link h3 text-white my-2">
+        Daily List
+      </a>
 
+      <!-- Form to add new lists -->
+      <form class="item new-item" method="POST" action="/new">
+        <input class="new-list-input" type="text" placeholder="New List" name="newList" autocomplete="off">
+        <button class="add-list-btn td-button" name="addList" type="submit" value="abc">+</button>
+      </form>
+
+      <!-- Lists list -->
+      <% listsArray.forEach((item) => { %>
+        <li>
+          <a class="nav-link" href="/lists/<%= item.name %> "><span class="mx-2"> <%= item.name %> </span></a>
+
+          <form class="delete-list" method="POST" action="/delete-list">
+            <button class="delete-list-btn" name="delete" type="button" value="<%= item.name %>"><i class="fas fa-times"></i></button>
+          </form>
+        </li>
+      <% }); %>
+    </ul>
+  </div>
+
+  <!-- Main Wrapper -->
+  <div class="p-1 my-container">
+
+    <!-- Burger button -->
+    <nav class="navbar navbar-dark px-5">
+      <a class="btn border-0" id="menu-btn"><i class="bx bx-menu"></i><span class="navbar-toggler-icon"></span></a>
+    </nav>
+  </div>
+
+  <!-- date tittle -->
   <div>
     <h1 class="date-tittle"> <%= title %> </h1>
   </div>
 
+  <!-- List tittle -->
   <div class="box" id="heading">
     <h1> <%= listTitle %> </h1>
   </div>
 
-
-
+  <!-- List items -->
   <div class="box">
-    <% for(i = 0; i < newListItems.length; i++){ %>
-      <div class="item">
-        <input type="checkbox">
-        <p> <%= newListItems[i] %> </p>
-      </div>
-    <% } %>
+    <% newListItems.forEach((item) => { %>
+      <form method="POST" action="/delete">
+        <div class="item">
+          <input name="checkbox" type="checkbox" value="<%=item._id%>" onchange="this.form.submit()">
+          <p> <%= item.name %> </p>
+        </div>
+        <input type="hidden" name="listName" value="<%= listTitle %>">
+      </form>
+    <% }); %>
 
-    <form class="item" method="POST" action="/">
-      <input type="text" placeholder="New Item" name="newItem" autocomplete="off">
-      <button name="list" type="submit" value= <%= listTitle %> >+</button>
+    <!-- New item form -->
+    <form class="item new-item" method="POST" action="/">
+      <input class="new-item-input" type="text" placeholder="New Item" name="newItem" autocomplete="off" autofocus>
+      <button class="td-button" name="list" type="submit" value="<%= listTitle %>">+</button>
     </form>
-
-
   </div>
 
-  <%- include("footer") %> 
 
+  <%- include("footer") %> 
